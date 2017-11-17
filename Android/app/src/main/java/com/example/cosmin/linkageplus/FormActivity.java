@@ -1,10 +1,11 @@
 package com.example.cosmin.linkageplus;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -14,7 +15,6 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 import java.util.Map;
 
-import butterknife.InjectView;
 
 public class FormActivity extends AppCompatActivity {
 
@@ -33,8 +33,15 @@ public class FormActivity extends AppCompatActivity {
             System.out.println("NameText: " + name);
             System.out.println("PhoneNumber " + phoneNumber);
 
+            final ProgressDialog progressDialog = new ProgressDialog(FormActivity.this,
+                    R.style.AppTheme_Dark_Dialog);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setMessage("Sending message");
+            progressDialog.show();
+
             new android.os.Handler().postDelayed(() -> {
                 makeRequest(name, phoneNumber);
+                progressDialog.dismiss();
             }, 3000);
 
         });
@@ -43,28 +50,27 @@ public class FormActivity extends AppCompatActivity {
     private void makeRequest(String name, String phoneNumber) {
         RequestQueue queue = Volley.newRequestQueue(FormActivity.this);
 
-        // createing request and waiting for response
-        //String url = "http://192.168.1.104/checkUser.php?Email=" + emailAddress + "&Password=" + hashedPassword;
-        String url = ""; 
+        String url = "http://192.168.137.1/addUser.php?Name=" + name + "&Contact=" + phoneNumber + "&Problem=heat&Priority=9";
         System.out.println("\n\n\nURL: " + url);
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
                     System.out.println("\n\nRESPONSE: " + response);
                     final String successResponse = "1";
                     final String zeroResponse = "0";
-                    if (response.equals(successResponse)) {
+                    final String parsedResponse = response.replaceAll(" ","");
+                    if (parsedResponse.equals(successResponse)) {
                         System.out.println("success");
-                        // TODO on success
-                    } else if (response.equals(zeroResponse)) {
+                        onRequestSuccess();
+                    } else if (parsedResponse.equals(zeroResponse)) {
                         System.out.println("Zero response!");
-                        // TODO  on failed
+                        onRequestFailed();
                     } else {
                         System.out.println("failed");
-                        // TODO on other
+                        onRequestFailed();
                     }
                 },
                 error -> {
-                    System.err.println("LOGIN ERROR");
+                    System.err.println("Request ERROR");
                 }
         ) {
             @Override
@@ -78,6 +84,14 @@ public class FormActivity extends AppCompatActivity {
             }
         };
         queue.add(postRequest);
+    }
+
+    private void onRequestSuccess() {
+        finish();
+    }
+
+    private void onRequestFailed() {
+        Toast.makeText(getBaseContext(), "Failed to send message!", Toast.LENGTH_LONG).show();
     }
 
 }
