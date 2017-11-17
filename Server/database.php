@@ -19,7 +19,7 @@
     {
         return readOneValue($conn,"select count(*) as value from Users where Username='$username'")["value"];
     }
-    function addNewUser($conn, $name, $contact, $problem, $priorityLevel)
+    function addNewUser($conn, $name, $contact, $problem, $priorityLevel, $locX, $locY)
     {
         $sql = "INSERT INTO Users (name, PhoneNumber ) 
         VALUES('$name', '$contact')";
@@ -29,12 +29,24 @@
             return 0;
         }
         $last_id = $conn->insert_id;
-        return addAlert($conn, $last_id, 0, $problem, $priorityLevel);
+        return addAlert($conn, $last_id, 0, $problem, $priorityLevel, $locX, $locY);
     }
-    function addAlert($conn, $userid, $type, $description, $priorityLevel)
+    function addAlert($conn, $userid, $type, $description, $priorityLevel, $locX, $locY)
     {
         $sql = "INSERT INTO alert (UserId, Type, Description, PriorityLevel, Time) 
         VALUES($userid, $type, '$description', $priorityLevel, NOW())";
+        $result = executeSqlWithoutWarning($conn,$sql);
+        if(0 == $result)
+        {
+            return 0;
+        }
+        $last_id = $conn->insert_id;
+        return addLocation($conn, $last_id, $locX, $locY);
+    }
+    function addLocation($conn, $alertId, $locX, $locY)
+    {
+        $sql = "INSERT INTO Location (AlertId, LocX, LocY) 
+        VALUES($alertId,'$locX', '$locY')";
         return executeSqlWithoutWarning($conn,$sql);
     }
     function readAlerts($conn)
@@ -52,7 +64,29 @@
         }
         return $entries;
     }
-   
+    function readPointEntries($conn)
+    {
+        $sql = "SELECT LocX,LocY,Time FROM Location
+            INNER JOIN Alert ON  Alert.AlertId = Location.AlertId
+            INNER JOIN Users on Users.UserId = Alert.UserId
+            ORDER BY Time DESC LIMIT 100";
+        $result = $conn->query($sql);
+        /*if ($result->num_rows <= 50)
+            die("empty table");*/
+        $points=array(array("X"=>0,"Y"=>0));
+        echo $result->num_rows;
+        for($i=0;$i<$result->num_rows;$i++)
+        {
+            $row=$result->fetch_assoc();
+            $points[$i]["Time"]=$row["Time"];
+            $points[$i]["X"]=$row["LocX"];
+            $points[$i]["Y"]=$row["LocY"];
+        }
+        //$points=array_reverse($points);
+        //var_dump($points);
+        return $points;
+    }
+    
     function executeSql($conn,$sql)
     {
         if ($conn->query($sql) === TRUE)
@@ -62,20 +96,7 @@
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
     }
-
-
-    function addEntry($conn,$temperature)
-    {
-        $sql = "INSERT INTO us (Temperature)
-        VALUES ($temperature)";
-        echo "<br>".$sql."<br>";
-        executeSql($conn,$sql);
-        //$last_id = $conn->insert_id;
-        //$sql="INSERT INTO phoneentry(EntryId,XLocation,YLocation)
-        //VALUES ($last_id,'$xLoc','$yLoc')";
-        //echo $sql;
-       // executeSql($conn,$sql);
-    }
+    
     function executeSqlWithoutWarning($conn,$sql)
     {
         if ($conn->query($sql) === TRUE)
@@ -86,7 +107,7 @@
         return 0;
     }
     
-   
+    
     function readOneValue($conn,$sql)
     {
         $result = $conn->query($sql);

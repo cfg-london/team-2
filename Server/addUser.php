@@ -8,7 +8,7 @@
     {
             $conn = openConnection();
             //function addNewUser($conn, $name, $contact, $problem, $priority)
-            $result = addNewUser($conn, $_GET['Name'], $_GET['Contact'], $_GET['Problem'], $_GET['Priority']);
+            $result = addNewUser($conn, $_GET['Name'], $_GET['Contact'], $_GET['Problem'], $_GET['Priority'],0,0);
     }
 
     echo $result;
