@@ -85,7 +85,7 @@ void url_transmit_data(int type)
     break;
     case TEMP:
     Serial.println("Temperature and steps sent");
-    url = "addBoardEntry.php?Name=" + pers_name + "&Steps=" + steps + "&Temperature=" + temp;
+    url = "addBoardEntry.php?Name=" + pers_name + "&Contact=" + contactInfo + "&Steps=" + steps + "&Temperature=" + temp;
     break;
   }
 
