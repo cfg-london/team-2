@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/red"
     tools:context="com.example.cosmin.linkageplus.FormActivity"
     android:orientation="vertical">
 
@@ -12,23 +14,52 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"
+        android:background="@color/white"
+        android:textAlignment="center"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="16dp"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
         tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/phoneNumberInput"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/white"
         android:hint="Phone Number"
+        android:textAlignment="center"
+        android:layout_marginTop="20dp"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="73dp" />
 
+    <EditText
+        android:id="@+id/commentMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@color/white"
+        android:layout_marginTop="20dp"
+        android:hint="Other comments"
+        android:textAlignment="center"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="73dp" />
+
+    <CheckBox
+        android:id="@+id/consentBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Consent" />
     <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="Submit"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="117dp"

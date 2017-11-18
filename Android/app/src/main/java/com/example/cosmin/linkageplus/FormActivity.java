@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import android.widget.Toast;
@@ -29,6 +30,9 @@ public class FormActivity extends AppCompatActivity implements LocationListener 
     private EditText editTextPhone;
     private LocationManager locationManager;
     private String provider;
+    private CheckBox consentBox;
+    private boolean checkedStatus = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,18 @@ public class FormActivity extends AppCompatActivity implements LocationListener 
         editTextName = (EditText) findViewById(R.id.nameInput);
         editTextPhone = (EditText) findViewById(R.id.phoneNumberInput);
         Button _submitButton = (Button) findViewById(R.id.submitButton);
+        consentBox = (CheckBox) findViewById(R.id.consentBox);
+
+        String problem = getIntent().getExtras().getString("arg1");
+        String priority = getIntent().getExtras().getString("arg2");
+
+        consentBox.setOnClickListener(e -> {
+            if (consentBox.isChecked())
+                checkedStatus = true;
+            else
+                checkedStatus = false;
+
+        });
 
         _submitButton.setOnClickListener((e) -> {
             String name = editTextName.getText().toString();
@@ -45,6 +61,11 @@ public class FormActivity extends AppCompatActivity implements LocationListener 
             System.out.println("NameText: " + name);
             System.out.println("PhoneNumber " + phoneNumber);
 
+            if (checkedStatus)
+                Toast.makeText(getBaseContext(), "You allowed us to have your location!", Toast.LENGTH_LONG).show();
+            else
+                Toast.makeText(getBaseContext(), "You posted anonymously!", Toast.LENGTH_LONG).show();
+
             final ProgressDialog progressDialog = new ProgressDialog(FormActivity.this,
                     R.style.AppTheme_Dark_Dialog);
             progressDialog.setIndeterminate(true);
@@ -52,25 +73,25 @@ public class FormActivity extends AppCompatActivity implements LocationListener 
             progressDialog.show();
 
             new android.os.Handler().postDelayed(() -> {
-                makeRequest(name, phoneNumber);
+                makeRequest(name, phoneNumber, problem, priority);
                 progressDialog.dismiss();
             }, 3000);
 
         });
     }
 
-    private void makeRequest(String name, String phoneNumber) {
+    private void makeRequest(String name, String phoneNumber, String problem, String priority) {
         RequestQueue queue = Volley.newRequestQueue(FormActivity.this);
         //http://192.168.137.1/addUser.php?Name=TestName&Contact=0745750542&Problem=heat&Priority=9&XLoc=0&YLoc=0
-        String priority = "9"; // TODO SPECIFIC type
-        String heat = "heat";
+        //String priority = "9"; // TODO SPECIFIC type
+
 
         // getting the location of the user
         double[] location = getGPS();
         String latitude = Double.toString(location[0]);
         String longitude = Double.toString(location[1]);
 
-        String url = "http://192.168.137.1/addUser.php?Name=" + name + "&Contact=" + phoneNumber + "&Problem=" + heat + "&Priority=" + priority + "&XLoc=" + latitude + "&YLoc=" + longitude;
+        String url = "http://192.168.137.1/addUser2.php?Name=" + name + "&Contact=" + phoneNumber + "&Problem=" + problem + "&Priority=" + priority + "&XLoc=" + latitude + "&YLoc=" + longitude;
         System.out.println("\n\n\nURL: " + url);
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
@@ -80,6 +101,7 @@ public class FormActivity extends AppCompatActivity implements LocationListener 
                     final String parsedResponse = response.replaceAll(" ","");
                     if (parsedResponse.equals(successResponse)) {
                         System.out.println("success");
+
                         onRequestSuccess();
                     } else if (parsedResponse.equals(zeroResponse)) {
                         System.out.println("Zero response!");
@@ -107,6 +129,7 @@ public class FormActivity extends AppCompatActivity implements LocationListener 
     }
 
     private void onRequestSuccess() {
+        Toast.makeText(getBaseContext(), "Request sent successful!", Toast.LENGTH_LONG).show();
         finish();
     }
 
