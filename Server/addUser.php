@@ -11,6 +11,13 @@
             $conn = openConnection();
             //function addNewUser($conn, $name, $contact, $problem, $priority)
             $result = addNewUser($conn, $_GET['Name'], $_GET['Contact'], $_GET['Problem'], $_GET['Priority'], $_GET['XLoc'], $_GET['YLoc']);
+            if(0==strcmp("FALL", $_GET['Problem']))
+            {
+                $filename="hasFallen.txt";
+                $file=fopen($filename,"w");
+                fwrite($file, "1");
+                fclose($file);
+            }
     }
 
     echo $result;
