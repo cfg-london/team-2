@@ -54,6 +54,7 @@ void loop() {
   if (check_fall_loop())
   ;
     //url_transmit_data(pers_name, contactInfo, "fall", HIGH_PRIORITY);
+  read_temp();
   //delay(100);
   
 }
