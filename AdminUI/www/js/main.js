@@ -253,8 +253,20 @@ setInterval(function() {
       $("#unresolved-count").text(data.length + 8)
       $("#reolved-pers").text((data.length + 8)/(data.length + 100)*100)
       var i = 1;
+      function formatDate(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
+      }
       data.map(function(x) {
-        $('#ref-table').append("<tr><td>"+i+"</td><td>"+x['Description']+"</td><td>"+x['PriorityLevel']+"</td></tr>")
+        var d = new Date(x['Time']);
+        var e = formatDate(d);
+        $('#ref-table').append("<tr><td>"+i+"</td><td>"+x['Description']+"</td><td>"+x['PriorityLevel']+"</td><td>"+e+"</td></tr>")
         i++;
       })
     })
