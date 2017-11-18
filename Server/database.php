@@ -19,7 +19,7 @@
     {
         return readOneValue($conn,"select count(*) as value from Users where Username='$username'")["value"];
     }
-    function addNewUser($conn, $name, $contact, $problem, $priorityLevel, $locX, $locY)
+    function addNewUser2($conn, $name, $contact, $problem, $priorityLevel, $locX, $locY)
     {
         $sql = "INSERT INTO Users (name, PhoneNumber ) 
         VALUES('$name', '$contact')";
@@ -29,7 +29,7 @@
             return 0;
         }
         $last_id = $conn->insert_id;
-        return addAlert($conn, $last_id, 0, $problem, $priorityLevel, $locX, $locY);
+        return addAlert2($conn, $last_id, 0, $problem, $priorityLevel, $locX, $locY);
     }
     function addNewBoardEntry($conn, $name, $contact, $steps, $temperature)
     {
@@ -64,6 +64,40 @@
         }
         $last_id = $conn->insert_id;
         return addLocation($conn, $last_id, $locX, $locY);
+    }
+    function addAlert2($conn, $userid, $type, $description, $priorityLevel, $locX, $locY)
+    {
+        $descriptionId=$description;
+        for($i=0;$i<8;$i++)
+        {
+            $alertName="";
+            switch($i)
+            {
+                case 0 : $alertName="Crisis Alert";break;
+                case 1 : $alertName= "Health Alert";break;
+                case 2 : $alertName= "Home Alert";break;
+                case 3 : $alertName= "Transport Alert";break;
+                case 4 : $alertName= "Food Alert";break;
+                case 5 : $alertName= "Money Alert";break;
+                case 6 : $alertName= "Other Alert";break;
+                default : $alertName= "Life Alert";break;
+            }
+            $priority=substr($descriptionId,0,1);
+            if(0 < $priority)
+            {
+                $sql = "INSERT INTO alert (UserId, Type, Description, PriorityLevel, Time) 
+                VALUES($userid, $type, '$alertName', $priority, NOW())";
+                $result = executeSqlWithoutWarning($conn,$sql);
+                if(0 == $result)
+                {
+                    return 0;
+                }
+                $last_id = $conn->insert_id;
+                addLocation($conn, $last_id, $locX, $locY);
+             }
+            $descriptionId=substr($descriptionId,1);
+        }
+        return 1;
     }
     function addLocation($conn, $alertId, $locX, $locY)
     {
