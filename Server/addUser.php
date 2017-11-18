@@ -4,11 +4,13 @@
     if(isset($_GET['Name'])
     && isset($_GET['Contact'])
     && isset($_GET['Problem'])
-    && isset($_GET['Priority']))
+    && isset($_GET['Priority'])
+    && isset($_GET['XLoc'])
+    && isset($_GET['YLoc']))
     {
             $conn = openConnection();
             //function addNewUser($conn, $name, $contact, $problem, $priority)
-            $result = addNewUser($conn, $_GET['Name'], $_GET['Contact'], $_GET['Problem'], $_GET['Priority'],0,0);
+            $result = addNewUser($conn, $_GET['Name'], $_GET['Contact'], $_GET['Problem'], $_GET['Priority'], $_GET['XLoc'], $_GET['YLoc']);
     }
 
     echo $result;
