@@ -98,7 +98,7 @@ void url_transmit_data(int type)
                "Connection: close\r\n\r\n");
   unsigned long timeout = millis();
   while (client.available() == 0) {
-    if (millis() - timeout > 1000) {
+    if (millis() - timeout > 1000) { //5000
       Serial.println(">>> Client Timeout !");
       client.stop();
       return;
@@ -115,8 +115,8 @@ void url_transmit_data(int type)
   }
   
   //Serial.println();
-  //Serial.println("closing connection");
-  delay(100);
+  Serial.println("closing connection");
+  //delay(100);
   
 }
 

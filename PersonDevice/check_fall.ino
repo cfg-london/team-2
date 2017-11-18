@@ -88,7 +88,7 @@ int check_fall_loop() {
    // PL("I falled");
     if ((millis() - lastFall) > FALL_INTERVAL)
     {
-      Serial.println("cazatura");
+      //Serial.println("cazatura");
       return (1);
       lastFall = millis();
     }
