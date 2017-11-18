@@ -249,4 +249,10 @@ $(document).ready(function() {
         $("#urgent-count").text(data.filter(function(x) {return x["PriorityLevel"] == 9}).length + 50)
         $("#unresolved-count").text(data.length + 8)
         $("#reolved-pers").text((data.length + 8)/(data.length + 100)*100)
+        var i = 1;
+        data.map(function(x) {
+            $('#ref-table').append("<tr><td>"+i+"</td><td>"+x['Description']+"</td><td>"+x['PriorityLevel']+"</td></tr>")
+            i++;
+        })
+        
     });
