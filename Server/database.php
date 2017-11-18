@@ -31,6 +31,12 @@
         $last_id = $conn->insert_id;
         return addAlert($conn, $last_id, 0, $problem, $priorityLevel, $locX, $locY);
     }
+    function addNewBoardEntry($conn, $steps, $temperature)
+    {
+        $sql = "INSERT INTO BoardEntry (UserId, Steps, Temperature ) 
+        VALUES(0,'$steps', '$temperature')";
+        return  executeSqlWithoutWarning($conn,$sql);
+    }
     function addAlert($conn, $userid, $type, $description, $priorityLevel, $locX, $locY)
     {
         $sql = "INSERT INTO alert (UserId, Type, Description, PriorityLevel, Time) 
@@ -49,7 +55,7 @@
         VALUES($alertId,'$locX', '$locY')";
         return executeSqlWithoutWarning($conn,$sql);
     }
-    function readAlerts($conn)
+    /*function readAlerts($conn)
     {
         $sql = "SELECT * FROM Users
             inner join alert on alert.UserId = Users.UserId";
@@ -63,7 +69,7 @@
                 "Problem"=>$row["Description"]];
         }
         return $entries;
-    }
+    }*/
     function readPointEntries($conn)
     {
         $sql = "SELECT LocX,LocY,Time FROM Location
@@ -74,13 +80,41 @@
         /*if ($result->num_rows <= 50)
             die("empty table");*/
         $points=array(array("X"=>0,"Y"=>0));
-        echo $result->num_rows;
         for($i=0;$i<$result->num_rows;$i++)
         {
             $row=$result->fetch_assoc();
             $points[$i]["Time"]=$row["Time"];
             $points[$i]["X"]=$row["LocX"];
             $points[$i]["Y"]=$row["LocY"];
+        }
+        //$points=array_reverse($points);
+        //var_dump($points);
+        return $points;
+    }
+
+    function readAlerts($conn)
+    {
+        $sql = "SELECT * FROM Location
+            INNER JOIN Alert ON  Alert.AlertId = Location.AlertId
+            INNER JOIN Users on Users.UserId = Alert.UserId
+            ORDER BY Time DESC LIMIT 100";
+        $result = $conn->query($sql);
+        /*if ($result->num_rows <= 50)
+            die("empty table");*/
+        $points=array(array("X"=>0,"Y"=>0));
+        //echo $result->num_rows;
+        for($i=0;$i<$result->num_rows;$i++)
+        {
+            $row=$result->fetch_assoc();
+            $points[$i]["Time"]=$row["Time"];
+            $points[$i]["X"]=$row["LocX"];
+            $points[$i]["Y"]=$row["LocY"];
+            $points[$i]["Name"]=$row["Name"];
+            $points[$i]["Contact"]=$row["PhoneNumber"];
+            $points[$i]["Y"]=$row["LocY"];
+            $points[$i]["Type"]=$row["Type"];
+            $points[$i]["Description"]=$row["Description"];
+            $points[$i]["PriorityLevel"]=$row["PriorityLevel"];
         }
         //$points=array_reverse($points);
         //var_dump($points);

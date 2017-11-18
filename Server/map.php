@@ -71,12 +71,12 @@
     include ("database.php");
     $conn=openConnection();
     $points=readPointEntries($conn);
-    var_dump($points);
+    //var_dump($points);
     $pointsCount=0;
     $lenghtOfPoints=sizeof($points);
 
 
-    echo "<br>".$lenghtOfPoints."<br>";
+    //echo "<br>".$lenghtOfPoints."<br>";
     //$lenghtOfPoints=400;
     //distanceOverMinute
     $thePointBeforeOneMinute=-1;
@@ -96,7 +96,7 @@
     //if($lenghtOfPoints>1)
         //$distanceBetweenLastPoints=haversineGreatCircleDistance($points[$lenghtOfPoints-1]["X"],$points[$lenghtOfPoints-1]["Y"],$points[$thePointBeforeOneMinute]["X"],$points[$thePointBeforeOneMinute]["Y"]);
     $distanceBetweenLastPoints=round($distanceBetweenLastPoints);
-    echo $distanceBetweenLastPoints;
+    //echo $distanceBetweenLastPoints;
     echo "<script>var distanceOverMinute=$distanceBetweenLastPoints;</script>";
     echo "<script>lastX=".$points[$lenghtOfPoints-1]["X"].";lastY=".$points[$lenghtOfPoints-1]["Y"].";</script>";
     echo "<script>var icons=[";
@@ -148,7 +148,7 @@
       
 
       var iconFeature2 = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.transform([26.24592234,47.64118283], 'EPSG:4326',     
+        geometry: new ol.geom.Point(ol.proj.transform([23.24592234,47.64118283], 'EPSG:4326',     
   'EPSG:3857')),
         name: 'Null Island',
         population: 4000,
@@ -219,8 +219,8 @@ vectorSource2.addFeature(precisionCircleFeature);
         layers: [bingLayer, vectorLayer,layer],
         target: document.getElementById('map'),
         view: new ol.View({
-          center: ol.proj.fromLonLat([22.87892234,47.79118283]),
-            zoom: 16
+          center: ol.proj.fromLonLat([0.00892234,51.49118283]),
+            zoom: 13
         })
       });
 
