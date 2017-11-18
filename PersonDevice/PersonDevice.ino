@@ -80,12 +80,12 @@ void url_transmit_data(int type)
   switch(type)
   {
     case FALL:
-    url = "addUser.php?Name=" + pers_name + "&Contact=" + contactInfo + "&Problem=" + "FALL" + "&Priority=9&XLoc=0&YLoc=0";
+    url = "/addUser.php?Name=" + pers_name + "&Contact=" + contactInfo + "&Problem=" + "FALL" + "&Priority=9&XLoc=0&YLoc=0";
     Serial.println("Fall alert sent");
     break;
     case TEMP:
     Serial.println("Temperature and steps sent");
-    url = "addBoardEntry.php?Name=" + pers_name + "&Contact=" + contactInfo + "&Steps=" + steps + "&Temperature=" + temp;
+    url = "/addBoardEntry.php?Name=" + pers_name + "&Contact=" + contactInfo + "&Steps=" + steps + "&Temperature=" + temp;
     break;
   }
 
@@ -111,10 +111,10 @@ void url_transmit_data(int type)
   // Read all the lines of the reply from server and print them to Serial
   while(client.available()){
     String line = client.readStringUntil('\r');
-    //Serial.print(line);
+    Serial.print(line);
   }
   
-  //Serial.println();
+  Serial.println();
   Serial.println("closing connection");
   //delay(100);
   
