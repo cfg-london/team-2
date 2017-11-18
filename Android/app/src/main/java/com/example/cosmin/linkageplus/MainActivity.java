@@ -1,26 +1,33 @@
 package com.example.cosmin.linkageplus;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.graphics.Color;
+import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import butterknife.InjectView;
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton _crisisAlert, _healthAlert, _homeAlert, _transportAlert, _foodAlert, _moneyAlert, _otherAlert, _lifeAlert;
+    private ImageButton textToSpeachButton;
     private int[] buttonClicks = new int[8];
     private ImageButton _checkButton;
     private Button _englishButton, _bengaliButton;
+    private String textMessage;
+    private final int REQ_CODE_SPEECH_INPUT = 100;
     private TextView _home, _finance, _food, _life, _health, _crisis, _transport, _other;
     Map<Integer, String> buttonMap= new HashMap<Integer, String>();
     /*button 0 ->crisis, 1 -> health, 2-> home, 3-> transport, 4->food, 5->money, 6-> other, 7->life /*
@@ -39,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        textToSpeachButton = (ImageButton) findViewById(R.id.speachRec);
         _home = (TextView) findViewById(R.id.home);
         _finance = (TextView) findViewById(R.id.finance);
         _food = (TextView) findViewById(R.id.food);
@@ -181,6 +189,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        textToSpeachButton.setOnClickListener(e -> {
+            promptSpeechInput();
+        });
+
         _englishButton = (Button) findViewById(R.id.englishButton) ;
         _englishButton.setOnClickListener(new View.OnClickListener(){
 
@@ -223,6 +235,45 @@ public class MainActivity extends AppCompatActivity {
             case 5 : return "Money Alert";
             case 6 : return "Other Alert";
             default : return "Life Alert";
+        }
+    }
+
+    private void promptSpeechInput() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
+                getString(R.string.speech_prompt));
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(),
+                    getString(R.string.speech_not_supported),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQ_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    textMessage = result.get(0);
+                    Toast.makeText(getApplicationContext(),
+                            textMessage,
+                            Toast.LENGTH_SHORT).show();
+                    // txtSpeechInput.setText("Salut");
+                }
+                break;
+            }
+
         }
     }
 }
