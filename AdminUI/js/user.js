@@ -123,6 +123,17 @@ $(document).ready(function() {
         };
         dailySalesChart2.update(data2)
       })
-    }, 2000)
+    }, 5000)
+    var flag = false
+    setInterval(function() {
+      $.get({url: 'getData.php'}, function(data, status) {
+        data = JSON.parse(data)
+          console.log(data[0]["Description"])
+        if (data[0]["Description"] = "FALL" && flag == false) {
+          $('.wrapper').prepend('<div class="alert alert-danger"><div class="container-fluid"><div class="alert-icon"><i class="material-icons">error_outline</i></div><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true"><i class="material-icons">clear</i></span></button><b>Error Alert:</b> A fall was detected by the fall detector. Please send help.</div></div>')
+        }
+        flag = true;
+      })
+    }, 1000)
   });
 })
