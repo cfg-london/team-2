@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2017 at 12:14 PM
+-- Generation Time: Nov 18, 2017 at 12:40 PM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -72,7 +72,15 @@ INSERT INTO `alert` (`AlertId`, `UserId`, `Type`, `Description`, `PriorityLevel`
 (28, 26, 0, 'FALL', 9, '2017-11-18 13:12:49'),
 (29, 27, 0, 'FALL', 9, '2017-11-18 13:12:55'),
 (30, 28, 0, 'FALL', 9, '2017-11-18 13:13:10'),
-(31, 29, 0, 'vvv', 9, '2017-11-18 13:13:34');
+(31, 29, 0, 'vvv', 9, '2017-11-18 13:13:34'),
+(32, 30, 0, 'vvv', 9, '2017-11-18 13:18:03'),
+(33, 31, 0, 'FALL', 9, '2017-11-18 13:18:18'),
+(34, 32, 0, 'FA', 9, '2017-11-18 13:20:17'),
+(35, 33, 0, 'FALL', 9, '2017-11-18 13:20:35'),
+(36, 34, 0, 'Health Alert', 1, '2017-11-18 13:38:29'),
+(37, 34, 0, 'Home Alert', 2, '2017-11-18 13:38:29'),
+(38, 34, 0, 'Food Alert', 1, '2017-11-18 13:38:29'),
+(39, 34, 0, 'Money Alert', 1, '2017-11-18 13:38:29');
 
 -- --------------------------------------------------------
 
@@ -195,7 +203,15 @@ INSERT INTO `location` (`LocationId`, `AlertId`, `LocX`, `LocY`) VALUES
 (28, 28, 0, 0),
 (29, 29, 0, 0),
 (30, 30, 0, 0),
-(31, 31, 0, 0);
+(31, 31, 0, 0),
+(32, 32, 0, 0),
+(33, 33, 0, 0),
+(34, 34, 0, 0),
+(35, 35, 0, 0),
+(36, 36, 51.5028994, -0.0211226),
+(37, 37, 51.5028994, -0.0211226),
+(38, 38, 51.5028994, -0.0211226),
+(39, 39, 51.5028994, -0.0211226);
 
 -- --------------------------------------------------------
 
@@ -242,7 +258,12 @@ INSERT INTO `users` (`UserId`, `Name`, `PhoneNumber`) VALUES
 (26, 'Ion', '0734523122'),
 (27, 'Ion', '0734523122'),
 (28, 'Ion', '0734523122'),
-(29, 'Ion', '0734523122');
+(29, 'Ion', '0734523122'),
+(30, 'Ion', '0734523122'),
+(31, 'Ion', '0734523122'),
+(32, 'Ion', '0734523122'),
+(33, 'Ion', '0734523122'),
+(34, 'John Smitt', '0745385379');
 
 --
 -- Indexes for dumped tables
@@ -280,7 +301,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `alert`
 --
 ALTER TABLE `alert`
-  MODIFY `AlertId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `AlertId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `boardentry`
@@ -292,13 +313,13 @@ ALTER TABLE `boardentry`
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
-  MODIFY `LocationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `LocationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
