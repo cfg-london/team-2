@@ -25,7 +25,7 @@ html(lang='en')
             img.brand-logo(src="./img/logo.png")
         .sidebar-wrapper
           ul.nav
-            li.active
+            li
               a(href='index.html')
                 i.material-icons dashboard
                 p Dashboard
@@ -37,7 +37,7 @@ html(lang='en')
               a(href='./maps.html')
                 i.material-icons location_on
                 p Maps
-            li
+            li.active
               a(href='./user.html')
                 i.material-icons.text-gray accessible
                 p Future
@@ -78,104 +78,50 @@ html(lang='en')
                   i.material-icons search
                   .ripple-container
         .content
-          .container-fluid
-            .row
-              .col-lg-3.col-md-6.col-sm-6
-                .card.card-stats
-                  .card-header(data-background-color='blue')
-                    i.material-icons content_copy
-                  .card-content
-                    p.category No. of Referrals
-                    h3.title#referral-count 100
-                  .card-footer
-                    .stats
-                      i.material-icons date_range
-                      | Last 24 Hours
-              .col-lg-3.col-md-6.col-sm-6
-                .card.card-stats
-                  .card-header(data-background-color='red')
-                    i.material-icons warning
-                  .card-content
-                    p.category Urgent Referrals
-                    h3.title#urgent-count 50
-                  .card-footer
-                    .stats
-                      i.material-icons date_range
-                      |  Last 24 Hours
-              .col-lg-3.col-md-6.col-sm-6
-                .card.card-stats
-                  .card-header(data-background-color='green')
-                    i.material-icons done_all
-                  .card-content
-                    p.category Resolved Referrals(%)
-                    h3.title#resolved-pers 95
-                  .card-footer
-                    .stats
-                      i.material-icons date_range
-                      |  Last 24 Hours
-              .col-lg-3.col-md-6.col-sm-6
-                .card.card-stats
-                  .card-header(data-background-color='orange')
-                    i.material-icons query_builder
-                  .card-content
-                    p.category Unresolved Referrals
-                    h3.title#unresolved-count 8
-                  .card-footer
-                    .stats
-                      i.material-icons date_range
-                      |  Last 24 Hours
-            .row
-              .col-md-6
-                .card
-                  .card-header.card-chart(data-background-color='green')
-                    #dailySalesChart.ct-chart
-                  .card-content
-                    h4.title Daily Referrals
-                    p.category
-                      span.text-success
-                        i.fa.fa-long-arrow-up
-                        |  55%
-                      |  increase in today's referrals.
-                  .card-footer
-                    .stats
-                      i.material-icons access_time
-                      |  updated 4 minutes ago
-              .col-md-6
-                .card
-                  .card-header.card-chart(data-background-color='orange')
-                    #emailsSubscriptionChart.ct-chart
-                  .card-content
-                    h4.title Referral Frequency by Category
-                    p.category <i>Life Planning Advice</i> is the most frequent.
-                  .card-footer
-                    .stats
-                      i.material-icons access_time
-                      |  campaign sent 2 days ago
-            .row 
-              .col-md-6
-                .card
-                  .card-header(data-background-color='purple')
-                    h4.title Top Referrers 
-                    p.category updated on 18th November, 2017
-                  .card-content.table-responsive
-                    table.table.table-hover
-                      thead.text-warning
-                        th ID
-                        th Name
-                        th Referrals
-                      tbody
-                        tr
-                          td 1
-                          td Meals on Wheels
-                          td 80
-                        tr
-                          td 2
-                          td Police
-                          td 70
-                        tr
-                          td 3
-                          td Fire Department
-                          td 50
+          .content
+            .container-fluid
+              .row
+                .col-md-8
+                  .row
+                    .col-md-12
+                      .card
+                        .card-header.card-chart(data-background-color='green')
+                          #dailySalesChart.ct-chart
+                        .card-content
+                          h4.title Step Count
+                          p.category
+                            span.text-success
+                              i.fa.fa-long-arrow-up
+                              |  55%
+                            |  increase in today's referrals.
+                        .card-footer
+                          .stats
+                            i.material-icons access_time
+                            |  updated now
+                  .row
+                    .col-md-12
+                      .card
+                        .card-header.card-chart(data-background-color='orange')
+                          #dailySalesChart2.ct-chart
+                        .card-content
+                          h4.title Room Temperature
+                          p.category Room temperature is stable
+                        .card-footer
+                          .stats
+                            i.material-icons access_time
+                            |  updated now
+                .col-md-4
+                  .card.card-profile
+                    .card-avatar
+                      a(href='#pablo')
+                        img.img(src='./img/faces/marc.jpeg')
+                    .content
+                      h6.category.text-gray 88 year-old
+                      h4.card-title Sue Manion
+                      p.card-content
+                        | Sue is on regular medications for arthritis and lives alone. She is vulnerable to falling and is provided a <b>fall-alert device</b>
+
+
                        
   // Core JS Files
   script(src='./js/jquery-3.2.1.min.js', type='text/javascript')
@@ -194,7 +140,7 @@ html(lang='en')
   // Material Dashboard javascript methods
   script(src='./js/material-dashboard.js?v=1.2.0')
   // Material Dashboard DEMO methods, don't include it in your project!
-  script(src='./js/main.js')
+  script(src='./js/user.js')
     
   
     
