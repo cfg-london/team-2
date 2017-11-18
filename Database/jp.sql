@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 18, 2017 at 12:42 AM
+-- Generation Time: Nov 18, 2017 at 05:18 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -274,7 +274,54 @@ INSERT INTO `alert` (`AlertId`, `UserId`, `Type`, `Description`, `PriorityLevel`
 (230, 241, 0, 'heat', 9, '2017-11-18 01:33:00'),
 (231, 242, 0, 'heat', 9, '2017-11-18 01:33:06'),
 (232, 243, 0, 'heat', 9, '2017-11-18 01:33:16'),
-(233, 244, 0, 'heat', 9, '2017-11-18 01:41:24');
+(233, 244, 0, 'heat', 9, '2017-11-18 01:41:24'),
+(234, 245, 0, 'heat', 9, '2017-11-18 01:44:16'),
+(235, 246, 0, 'fall', 3, '2017-11-18 01:47:29'),
+(236, 247, 0, 'fall', 3, '2017-11-18 01:47:34'),
+(237, 248, 0, 'fall', 3, '2017-11-18 01:47:40'),
+(238, 249, 0, 'fall', 3, '2017-11-18 01:47:45'),
+(239, 250, 0, 'fall', 3, '2017-11-18 01:47:50'),
+(240, 251, 0, 'fall', 3, '2017-11-18 01:47:55'),
+(241, 252, 0, 'fall', 3, '2017-11-18 01:48:01'),
+(242, 253, 0, 'fall', 3, '2017-11-18 01:48:06'),
+(243, 254, 0, 'fall', 3, '2017-11-18 01:49:16'),
+(244, 255, 0, 'fall', 3, '2017-11-18 01:49:21'),
+(245, 256, 0, 'heat', 9, '2017-11-18 04:52:04'),
+(246, 257, 0, 'heat', 9, '2017-11-18 04:53:30'),
+(247, 258, 0, 'heat', 9, '2017-11-18 04:53:38'),
+(248, 259, 0, 'heat', 9, '2017-11-18 05:27:50'),
+(249, 260, 0, 'heat', 9, '2017-11-18 05:29:22'),
+(250, 261, 0, 'heat', 9, '2017-11-18 06:05:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `boardentry`
+--
+
+CREATE TABLE `boardentry` (
+  `BoardEntryId` int(11) NOT NULL,
+  `UserId` int(11) NOT NULL,
+  `Steps` int(11) NOT NULL,
+  `Temperature` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `boardentry`
+--
+
+INSERT INTO `boardentry` (`BoardEntryId`, `UserId`, `Steps`, `Temperature`) VALUES
+(1, 0, 0, 22.5),
+(2, 0, 0, 22.5),
+(3, 262, 0, 22.5),
+(4, 262, 0, 22.5),
+(5, 262, 0, 22.5),
+(6, 262, 0, 22.5),
+(7, 263, 0, 22.5),
+(8, 263, 0, 22.5),
+(9, 263, 0, 22.5),
+(10, 263, 0, 22.5),
+(11, 264, 0, 22.5);
 
 -- --------------------------------------------------------
 
@@ -294,10 +341,9 @@ CREATE TABLE `location` (
 --
 
 INSERT INTO `location` (`LocationId`, `AlertId`, `LocX`, `LocY`) VALUES
-(1, 230, 0, 0),
-(2, 231, 0, 0),
-(3, 232, 0, 0),
-(4, 233, 0, 0);
+(19, 248, 51.5029007, -0.0211642),
+(20, 249, 25, 25),
+(21, 250, 51.5029007, -0.0211642);
 
 -- --------------------------------------------------------
 
@@ -559,7 +605,27 @@ INSERT INTO `users` (`UserId`, `Name`, `PhoneNumber`) VALUES
 (241, 'TestName', '0745750542'),
 (242, 'TestName', '0745750542'),
 (243, 'TestName', '0745750542'),
-(244, 'TestName', '0745750542');
+(244, 'TestName', '0745750542'),
+(245, 'gdhdj', 'hdjdjsj'),
+(246, 'Ion', '0734523122'),
+(247, 'Ion', '0734523122'),
+(248, 'Ion', '0734523122'),
+(249, 'Ion', '0734523122'),
+(250, 'Ion', '0734523122'),
+(251, 'Ion', '0734523122'),
+(252, 'Ion', '0734523122'),
+(253, 'Ion', '0734523122'),
+(254, 'Ion', '0734523122'),
+(255, 'Ion', '0734523122'),
+(256, 'TestName', '0745750542'),
+(257, 'TestName', '0745750542'),
+(258, 'TestName', '0745750542'),
+(259, 'gdjdh', 'dhdh'),
+(260, 'TestName', '0745750542'),
+(261, ' fyzt', 'cred xdy'),
+(262, 'test', '074685156'),
+(263, 'test', '0746851565'),
+(264, 'test prenume', '0746851565');
 
 --
 -- Indexes for dumped tables
@@ -570,6 +636,12 @@ INSERT INTO `users` (`UserId`, `Name`, `PhoneNumber`) VALUES
 --
 ALTER TABLE `alert`
   ADD PRIMARY KEY (`AlertId`);
+
+--
+-- Indexes for table `boardentry`
+--
+ALTER TABLE `boardentry`
+  ADD PRIMARY KEY (`BoardEntryId`);
 
 --
 -- Indexes for table `location`
@@ -591,19 +663,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `alert`
 --
 ALTER TABLE `alert`
-  MODIFY `AlertId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=234;
+  MODIFY `AlertId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=251;
+
+--
+-- AUTO_INCREMENT for table `boardentry`
+--
+ALTER TABLE `boardentry`
+  MODIFY `BoardEntryId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `location`
 --
 ALTER TABLE `location`
-  MODIFY `LocationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `LocationId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=245;
+  MODIFY `UserId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
