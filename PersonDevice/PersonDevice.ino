@@ -8,30 +8,17 @@ const char* host = "192.168.137.1";
 const char* streamId   = "/addUser.php";
 const char* privateKey = "....................";
 
-String inputString = "";         // a string to hold incoming data
-
-int velocity=0;
-int rpm=0;
-int temp_brake=0;
-int distance=0;
-int humidity=0;
-int temp_ambiental=0;
-int front_gear=0;
-int rear_gear=0;
-float x=0, y=0, z=0;
-int lights=0;
-int temp_body=0;
-int brake_condition=0;
-unsigned int acceleration=0;
-int braking_effort=0;
-
 void  wifi_connect();
+int steps = 0;
+WiFiClient client;
+
+String inputString;
+const int httpPort = 80;
 
 void setup() {
-  Serial.begin(115200);
- 
+  Serial.begin(9600);
+ // Serial.begin(115200);
   delay(10);
-
   inputString.reserve(200);
 
   // We start by connecting to a WiFi network
@@ -52,52 +39,44 @@ void setup() {
   Serial.println("WiFi connected");  
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
+  check_fall_setup();
 }
 
+String pers_name = "Ion";
+String contactInfo = "0734523122";
+#define HIGH_PRIORITY 3
+#define MEDIUM_PRIORITY 2
+#define LOW_PRIORITY 1
 
 
 void loop() {
- 
-url_transmit_data();
-delay(5000);
+
+  if (check_fall_loop())
+  ;
+    //url_transmit_data(pers_name, contactInfo, "fall", HIGH_PRIORITY);
+  //delay(100);
   
 }
-void url_transmit_data()
+void url_transmit_data(String pers_name, String contactInfo, String problem, int priority)
 {
-  // We now create a URI for the request
-
-  /*
-   * 
-   * 
-   * http://localhost/hs/index.php?bodyTemp=25&brakeCondition=100&lights=0&frontGear=1&backGear=1&speed=20&acceleration=5&brakingEffort=0&rpm=0&diskTemp=0&distance=0&humidity=0&extTemp=0&accelX=0&accelY=0&accelZ=0
-   */
-   Serial.print("connecting to ");
+  Serial.print("connecting to ");
   Serial.println(host);
-  
-  // Use WiFiClient class to create TCP connections
-  
-  WiFiClient client;
-  
-  const int httpPort = 80;
   if (!client.connect(host, httpPort)) {
     Serial.println("connection failed");
     return;
   }
-   
   String url = "";
-  
   url += streamId;
   url += "?Name=";
-  url += "NameOfPerson";
+  url += pers_name;
   url += "&Contact=";
-  url += "07456785231";
+  url += contactInfo;
   url += "&Problem=";
-  url += "fall";
+  url += problem;
   url += "&Priority=";
-  url += "9";
+  url += priority;
 
   Serial.print("Requesting URL: ");
-  
   Serial.println(url);
   
   // This will send the request to the server
