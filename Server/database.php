@@ -31,6 +31,18 @@
         $last_id = $conn->insert_id;
         return addAlert2($conn, $last_id, 0, $problem, $priorityLevel, $locX, $locY);
     }
+    function addNewUser($conn, $name, $contact, $problem, $priorityLevel, $locX, $locY)
+    {
+        $sql = "INSERT INTO Users (name, PhoneNumber ) 
+        VALUES('$name', '$contact')";
+        $result = executeSqlWithoutWarning($conn,$sql);
+        if(0 == $result)
+        {
+            return 0;
+        }
+        $last_id = $conn->insert_id;
+        return addAlert($conn, $last_id, 0, $problem, $priorityLevel, $locX, $locY);
+    }
     function addNewBoardEntry($conn, $name, $contact, $steps, $temperature)
     {
         $last_id = 0;
