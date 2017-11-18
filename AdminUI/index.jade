@@ -82,50 +82,50 @@ html(lang='en')
             .row
               .col-lg-3.col-md-6.col-sm-6
                 .card.card-stats
-                  .card-header(data-background-color='orange')
+                  .card-header(data-background-color='blue')
                     i.material-icons content_copy
                   .card-content
                     p.category No. of Referrals
-                    h3.title 100
+                    h3.title#referral-count 100
                   .card-footer
                     .stats
                       i.material-icons date_range
                       | Last 24 Hours
               .col-lg-3.col-md-6.col-sm-6
                 .card.card-stats
-                  .card-header(data-background-color='green')
-                    i.material-icons store
+                  .card-header(data-background-color='red')
+                    i.material-icons warning
                   .card-content
                     p.category Urgent Referrals
-                    h3.title 50
+                    h3.title#urgent-count 50
                   .card-footer
                     .stats
                       i.material-icons date_range
                       |  Last 24 Hours
               .col-lg-3.col-md-6.col-sm-6
                 .card.card-stats
-                  .card-header(data-background-color='blue')
-                    i.fa.fa-twitter
+                  .card-header(data-background-color='green')
+                    i.material-icons done_all
                   .card-content
                     p.category Resolved Referrals(%)
-                    h3.title 95
+                    h3.title#resolved-pers 95
                   .card-footer
                     .stats
                       i.material-icons date_range
                       |  Last 24 Hours
               .col-lg-3.col-md-6.col-sm-6
                 .card.card-stats
-                  .card-header(data-background-color='red')
-                    i.material-icons info_outline
+                  .card-header(data-background-color='orange')
+                    i.material-icons query_builder
                   .card-content
                     p.category Unresolved Referrals
-                    h3.title 8
+                    h3.title#unresolved-count 8
                   .card-footer
                     .stats
                       i.material-icons date_range
                       |  Last 24 Hours
             .row
-              .col-md-4
+              .col-md-6
                 .card
                   .card-header.card-chart(data-background-color='green')
                     #dailySalesChart.ct-chart
@@ -140,7 +140,7 @@ html(lang='en')
                     .stats
                       i.material-icons access_time
                       |  updated 4 minutes ago
-              .col-md-4
+              .col-md-6
                 .card
                   .card-header.card-chart(data-background-color='orange')
                     #emailsSubscriptionChart.ct-chart
@@ -151,7 +151,8 @@ html(lang='en')
                     .stats
                       i.material-icons access_time
                       |  campaign sent 2 days ago
-              .col-md-4
+            .row 
+              .col-md-6
                 .card
                   .card-header(data-background-color='purple')
                     h4.title Top Referrers 
@@ -194,12 +195,6 @@ html(lang='en')
   script(src='./js/material-dashboard.js?v=1.2.0')
   // Material Dashboard DEMO methods, don't include it in your project!
   script(src='./js/main.js')
-  script.
-    $(document).ready(function() {
-
-        // Javascript method's body can be found in assets/js/demos.js
-        demo.initDashboardPageCharts();
-
-    });
+    
   
     

@@ -79,9 +79,9 @@ demo = {
         /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
 
         var dataEmailsSubscriptionChart = {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            labels: ["food", "money", "house", "crisis", "health", "advice", "transport", "other"],
             series: [
-                [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
+                [542, 443, 320, 780, 553, 453, 326, 434]
 
             ]
         };
@@ -239,3 +239,14 @@ demo = {
 
 
 }
+
+$(document).ready(function() {
+
+        // Javascript method's body can be found in assets/js/demos.js
+        demo.initDashboardPageCharts();
+        var data = [{"X":"51.5029007","Y":"-0.0211642","Time":"2017-11-18 06:05:50","Name":" fyzt","Contact":"cred xdy","Type":"0","Description":"heat","PriorityLevel":"9"},{"Time":"2017-11-18 05:29:22","X":"25","Y":"25","Name":"TestName","Contact":"0745750542","Type":"0","Description":"heat","PriorityLevel":"9"},{"Time":"2017-11-18 05:27:50","X":"51.5029007","Y":"-0.0211642","Name":"gdjdh","Contact":"dhdh","Type":"0","Description":"heat","PriorityLevel":"9"}]
+        $("#referral-count").text(data.length + 100)
+        $("#urgent-count").text(data.filter(function(x) {return x["PriorityLevel"] == 9}).length + 50)
+        $("#unresolved-count").text(data.length + 8)
+        $("#reolved-pers").text((data.length + 8)/(data.length + 100)*100)
+    });
