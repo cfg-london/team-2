@@ -56,10 +56,7 @@ int check_fall_loop() {
   accelerometer.x = ((short)values[1] << 8) | values[0]; // The most significant byte is shifted to the left
   accelerometer.y = ((short)values[3] << 8) | values[2];
   accelerometer.z = ((short)values[5] << 8) | values[4];
-  Serial.print(accelerometer.x);Serial.print(" ");Serial.print(accelerometer.y);Serial.print(" ");Serial.print(accelerometer.z);Serial.print("\n");
-  if(60000 < accelerometer.x )
-    Serial.println("bigger");
-  //Serial.print("x = ");Serial.print(accelerometer.x); Serial.print("y = ");Serial.println(accelerometer.y);
+  //Serial.print(accelerometer.x);Serial.print(" ");Serial.print(accelerometer.y);Serial.print(" ");Serial.print(accelerometer.z);Serial.print("\n");
   int diff = lastAcceleromter.y - accelerometer.y;
   if (diff < 0)
   {
@@ -85,7 +82,7 @@ int check_fall_loop() {
 
   float val = sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
   float MIN_VAL = 300;
-  //PL(val);
+  Serial.print(0);Serial.print(" ");Serial.print(1500);Serial.print(" ");Serial.println(val);
    if (val > MIN_VAL)
   {
    // PL("I falled");
