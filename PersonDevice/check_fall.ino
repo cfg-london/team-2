@@ -82,7 +82,7 @@ int check_fall_loop() {
 
   float val = sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
   float MIN_VAL = 300;
-  Serial.print(0);Serial.print(" ");Serial.print(1500);Serial.print(" ");Serial.println(val);
+  //xSerial.print(0);Serial.print(" ");Serial.print(1500);Serial.print(" ");Serial.println(val);
    if (val > MIN_VAL)
   {
    // PL("I falled");
