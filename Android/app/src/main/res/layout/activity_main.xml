@@ -2,26 +2,278 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.cosmin.linkageplus.MainActivity">
+    android:layout_height="800dp"
+    android:orientation="vertical"
+    tools:context="com.example.pasca.a70version.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageButton
+        android:id="@+id/speachRec"
+        android:layout_width="124dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/roundedbutton"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/mic_no_shadow" />
+
+    <ImageButton
+        android:id="@+id/crisisAlert"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="40dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/otherAlert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/crisis" />
+
+    <ImageButton
+        android:id="@+id/foodAlert"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+
+        android:layout_marginTop="12dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homeAlert"
+        app:srcCompat="@drawable/food" />
+
+    <ImageButton
+        android:id="@+id/healthAlert"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/transportAlert"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/foodAlert"
+        app:layout_constraintVertical_bias="0.4"
+        app:srcCompat="@drawable/health" />
+
+    <ImageButton
+        android:id="@+id/lifeAlert"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="36dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/crisisAlert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/life_planning" />
+
+
+    <ImageButton
+        android:id="@+id/moneyAlert"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/lifeAlert"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bengaliButton"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/finance" />
+
+    <ImageButton
+        android:id="@+id/homeAlert"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/speachRec"
+        app:srcCompat="@drawable/home" />
+
+    <ImageButton
+        android:id="@+id/transportAlert"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/confirmationButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/transport" />
+
+    <ImageButton
+        android:id="@+id/otherAlert"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:adjustViewBounds="false"
+        android:background="@android:color/transparent"
+        android:cropToPadding="false"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="@+id/confirmationButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.761"
+        app:layout_constraintStart_toEndOf="@+id/transportAlert"
+        app:srcCompat="@drawable/other" />
+
+    <ImageButton
+        android:id="@+id/confirmationButton"
+        android:layout_width="61dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="416dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/speachRec"
+        app:srcCompat="@android:drawable/checkbox_on_background" />
 
     <Button
-        android:id="@+id/formActivityButton"
+        android:id="@+id/englishButton"
+        android:layout_width="91dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="English"
+        app:layout_constraintBottom_toTopOf="@+id/bengaliButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.646"
+        app:layout_constraintStart_toEndOf="@+id/speachRec"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/bengaliButton"
+        android:layout_width="90dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
+        android:text="Bengali"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.598"
+        app:layout_constraintStart_toEndOf="@+id/speachRec"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/home"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="88dp"
+        android:text="Home"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/food"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/speachRec"
+        app:layout_constraintVertical_bias="0.033" />
+
+    <TextView
+        android:id="@+id/finance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Form"
-        tools:layout_editor_absoluteX="113dp"
-        tools:layout_editor_absoluteY="218dp"
-        tools:ignore="MissingConstraints" />
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="96dp"
+        android:text="Finance"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/life"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.646"
+        app:layout_constraintStart_toEndOf="@+id/home"
+        app:layout_constraintTop_toBottomOf="@+id/bengaliButton"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/food"
+        android:layout_width="41dp"
+        android:layout_height="17dp"
+        android:layout_marginBottom="92dp"
+        android:layout_marginStart="60dp"
+        android:text="Food"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/health"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/life"
+        android:layout_width="wrap_content"
+        android:layout_height="18dp"
+        android:layout_marginBottom="96dp"
+        android:layout_marginEnd="64dp"
+        android:text="Life Planning"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/crisis"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/health"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="92dp"
+        android:layout_marginStart="60dp"
+        android:text="Health"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/transport"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/crisis"
+        android:layout_width="49dp"
+        android:layout_height="23dp"
+        android:layout_marginBottom="92dp"
+        android:layout_marginEnd="84dp"
+        android:text="Crisis"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/other"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/transport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:layout_marginStart="48dp"
+        android:text="Transport"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/confirmationButton"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/other"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="100dp"
+        android:text="Other"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/confirmationButton"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>
