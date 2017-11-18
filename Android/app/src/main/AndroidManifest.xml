@@ -24,7 +24,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".FormActivity" />
-        <activity android:name=".VoiceActivity"></activity>
 
     </application>
 

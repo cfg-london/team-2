@@ -17,9 +17,9 @@ public class MainActivity extends AppCompatActivity {
 
         formActivityButton = (Button) findViewById(R.id.formActivityButton);
         formActivityButton.setOnClickListener((e) ->{
-            formActivityButton.setBackgroundColor(Color.RED);
-            //Intent formActivity = new Intent(getApplicationContext(), FormActivity.class);
-            //startActivity(formActivity);
+            //formActivityButton.setBackgroundColor(Color.RED);
+            Intent formActivity = new Intent(getApplicationContext(), FormActivity.class);
+            startActivity(formActivity);
         });
     }
 }

@@ -1,14 +1,11 @@
 package com.example.cosmin.linkageplus;
 
-import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -22,6 +19,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -40,30 +38,6 @@ public class FormActivity extends AppCompatActivity implements LocationListener 
         editTextPhone = (EditText) findViewById(R.id.phoneNumberInput);
         Button _submitButton = (Button) findViewById(R.id.submitButton);
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        provider = locationManager.getBestProvider(criteria, false);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        Location location = locationManager.getLastKnownLocation(provider);
-        if (location != null) {
-            System.out.println("Provider " + provider + " has been selected.");
-            Toast.makeText(this, "prov obtained",
-                    Toast.LENGTH_SHORT).show();
-            onLocationChanged(location);
-        } else {
-            Toast.makeText(this, "error",
-                    Toast.LENGTH_SHORT).show();
-            System.out.println("not available");
-        }
         _submitButton.setOnClickListener((e) -> {
             String name = editTextName.getText().toString();
             String phoneNumber = editTextPhone.getText().toString();
@@ -87,8 +61,16 @@ public class FormActivity extends AppCompatActivity implements LocationListener 
 
     private void makeRequest(String name, String phoneNumber) {
         RequestQueue queue = Volley.newRequestQueue(FormActivity.this);
+        //http://192.168.137.1/addUser.php?Name=TestName&Contact=0745750542&Problem=heat&Priority=9&XLoc=0&YLoc=0
+        String priority = "9"; // TODO SPECIFIC type
+        String heat = "heat";
 
-        String url = "http://192.168.137.1/addUser.php?Name=" + name + "&Contact=" + phoneNumber + "&Problem=heat&Priority=9";
+        // getting the location of the user
+        double[] location = getGPS();
+        String latitude = Double.toString(location[0]);
+        String longitude = Double.toString(location[1]);
+
+        String url = "http://192.168.137.1/addUser.php?Name=" + name + "&Contact=" + phoneNumber + "&Problem=" + heat + "&Priority=" + priority + "&XLoc=" + latitude + "&YLoc=" + longitude;
         System.out.println("\n\n\nURL: " + url);
         StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                 response -> {
@@ -115,8 +97,8 @@ public class FormActivity extends AppCompatActivity implements LocationListener 
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("Username", name);
-                params.put("Password", phoneNumber);
+                params.put("name", name);
+                params.put("phonenumber", phoneNumber);
 
                 return params;
             }
@@ -160,5 +142,26 @@ public class FormActivity extends AppCompatActivity implements LocationListener 
     @Override
     public void onProviderDisabled(String s) {
 
+    }
+
+    @SuppressLint("MissingPermission") //case it doesn't have it it will get location from the internet
+    private double[] getGPS() {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        List<String> providers = lm.getProviders(true);
+
+        /* Loop over the array backwards, and if you get an accurate location, then break out the loop*/
+        Location l = null;
+
+        for (int i=providers.size()-1; i>=0; i--) {
+            l = lm.getLastKnownLocation(providers.get(i));
+            if (l != null) break;
+        }
+
+        double[] gps = new double[2];
+        if (l != null) {
+            gps[0] = l.getLatitude();
+            gps[1] = l.getLongitude();
+        }
+        return gps;
     }
 }
