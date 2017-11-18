@@ -22,7 +22,7 @@ demo = {
         dataDailySalesChart = {
             labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
             series: [
-            [12, 17, 7, 17, 23, 18, 38]
+                [12, 17, 7, 17, 23, 18, 38]
             ]
         };
 
@@ -52,7 +52,7 @@ demo = {
         dataDailySalesChart = {
             labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
             series: [
-            [12, 17, 7, 17, 23, 18, 38]
+                [12, 17, 7, 17, 23, 18, 38]
             ]
         };
 
@@ -81,7 +81,7 @@ demo = {
         var dataEmailsSubscriptionChart = {
             labels: ["food", "money", "house", "crisis", "health", "advice", "transport", "other"],
             series: [
-            [542, 443, 320, 780, 553, 453, 326, 434]
+                [542, 443, 320, 780, 553, 453, 326, 434]
 
             ]
         };
@@ -99,14 +99,14 @@ demo = {
             }
         };
         var responsiveOptions = [
-        ['screen and (max-width: 640px)', {
-            seriesBarDistance: 5,
-            axisX: {
-                labelInterpolationFnc: function(value) {
-                    return value[0];
+            ['screen and (max-width: 640px)', {
+                seriesBarDistance: 5,
+                axisX: {
+                    labelInterpolationFnc: function(value) {
+                        return value[0];
+                    }
                 }
-            }
-        }]
+            }]
         ];
         var emailsSubscriptionChart = Chartist.Bar('#emailsSubscriptionChart', dataEmailsSubscriptionChart, optionsEmailsSubscriptionChart, responsiveOptions);
 
@@ -244,19 +244,15 @@ $(document).ready(function() {
 
         // Javascript method's body can be found in assets/js/demos.js
         demo.initDashboardPageCharts();
-        // var data = [{"X":"51.5029007","Y":"-0.0211642","Time":"2017-11-18 06:05:50","Name":" fyzt","Contact":"cred xdy","Type":"0","Description":"heat","PriorityLevel":"9"},{"Time":"2017-11-18 05:29:22","X":"25","Y":"25","Name":"TestName","Contact":"0745750542","Type":"0","Description":"heat","PriorityLevel":"9"},{"Time":"2017-11-18 05:27:50","X":"51.5029007","Y":"-0.0211642","Name":"gdjdh","Contact":"dhdh","Type":"0","Description":"heat","PriorityLevel":"9"}]
-        $.get({
-            headers: 'Access-Control-Allow-Headers: x-requested-with',
-            url: 'http://192.168.137.1/getData.php'}, function(data, status) {
-            console.log(data)
-            $("#referral-count").text(data.length + 100)
-            $("#urgent-count").text(data.filter(function(x) {return x["PriorityLevel"] == 9}).length + 50)
-            $("#unresolved-count").text(data.length + 8)
-            $("#reolved-pers").text((data.length + 8)/(data.length + 100)*100)
-            var i = 1;
-            data.map(function(x) {
-                $('#ref-table').append("<tr><td>"+i+"</td><td>"+x['Description']+"</td><td>"+x['PriorityLevel']+"</td></tr>")
-                i++;
-            })
+        var data = [{"X":"51.5029007","Y":"-0.0211642","Time":"2017-11-18 06:05:50","Name":" fyzt","Contact":"cred xdy","Type":"0","Description":"heat","PriorityLevel":"9"},{"Time":"2017-11-18 05:29:22","X":"25","Y":"25","Name":"TestName","Contact":"0745750542","Type":"0","Description":"heat","PriorityLevel":"9"},{"Time":"2017-11-18 05:27:50","X":"51.5029007","Y":"-0.0211642","Name":"gdjdh","Contact":"dhdh","Type":"0","Description":"heat","PriorityLevel":"9"}]
+        $("#referral-count").text(data.length + 100)
+        $("#urgent-count").text(data.filter(function(x) {return x["PriorityLevel"] == 9}).length + 50)
+        $("#unresolved-count").text(data.length + 8)
+        $("#reolved-pers").text((data.length + 8)/(data.length + 100)*100)
+        var i = 1;
+        data.map(function(x) {
+            $('#ref-table').append("<tr><td>"+i+"</td><td>"+x['Description']+"</td><td>"+x['PriorityLevel']+"</td></tr>")
+            i++;
         })
+        
     });
