@@ -140,7 +140,7 @@
     {
         $sql = "SELECT * FROM BoardEntry
             INNER JOIN Users on Users.UserId = BoardEntry.UserId
-            ORDER BY Time DESC LIMIT 100";
+            ORDER BY BoardEntryId DESC LIMIT 100";
         $result = $conn->query($sql);
         /*if ($result->num_rows <= 50)
             die("empty table");*/
@@ -149,7 +149,6 @@
         for($i=0;$i<$result->num_rows;$i++)
         {
             $row=$result->fetch_assoc();
-            $points[$i]["Time"]=$row["Time"];
             $points[$i]["Name"]=$row["Name"];
             $points[$i]["Contact"]=$row["PhoneNumber"];
             $points[$i]["Steps"]=$row["Steps"];
