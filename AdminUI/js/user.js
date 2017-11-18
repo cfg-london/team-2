@@ -68,7 +68,6 @@ $(document).ready(function() {
       tension: 0
     }),
     low: 0,
-    high: 200, 
     chartPadding: {
       top: 0,
       right: 0,
@@ -92,7 +91,6 @@ $(document).ready(function() {
         tension: 0
       }),
       low: 0,
-      high: 200, 
       chartPadding: {
         top: 0,
         right: 0,
@@ -125,6 +123,6 @@ $(document).ready(function() {
         };
         dailySalesChart2.update(data2)
       })
-    }, 1000)
+    }, 2000)
   });
 })
